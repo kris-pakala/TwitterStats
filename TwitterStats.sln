@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterStats.API", "TwitterStats.API\TwitterStats.API.csproj", "{02D4012D-C907-4FE1-930C-51041DC0F5E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwitterStats.API", "TwitterStats.API\TwitterStats.API.csproj", "{02D4012D-C907-4FE1-930C-51041DC0F5E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterStats.Models", "TwitterStats.Models\TwitterStats.Models.csproj", "{0FFEEF43-0E71-4A83-973C-D32FD425C56B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwitterStats.Models", "TwitterStats.Models\TwitterStats.Models.csproj", "{0FFEEF43-0E71-4A83-973C-D32FD425C56B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterStats.Tests", "TwitterStats.Tests\TwitterStats.Tests.csproj", "{A5719824-BD34-4949-AE9D-0D44A6C00AE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0FFEEF43-0E71-4A83-973C-D32FD425C56B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FFEEF43-0E71-4A83-973C-D32FD425C56B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FFEEF43-0E71-4A83-973C-D32FD425C56B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5719824-BD34-4949-AE9D-0D44A6C00AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5719824-BD34-4949-AE9D-0D44A6C00AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5719824-BD34-4949-AE9D-0D44A6C00AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5719824-BD34-4949-AE9D-0D44A6C00AE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
