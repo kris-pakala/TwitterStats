@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwitterStats.Models", "Twit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterStats.Tests", "TwitterStats.Tests\TwitterStats.Tests.csproj", "{A5719824-BD34-4949-AE9D-0D44A6C00AE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterStats.Services", "TwitterStats.Services\TwitterStats.Services.csproj", "{EBD9A0A1-AAF8-425C-9CD4-055521E40F0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A5719824-BD34-4949-AE9D-0D44A6C00AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5719824-BD34-4949-AE9D-0D44A6C00AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5719824-BD34-4949-AE9D-0D44A6C00AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBD9A0A1-AAF8-425C-9CD4-055521E40F0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD9A0A1-AAF8-425C-9CD4-055521E40F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD9A0A1-AAF8-425C-9CD4-055521E40F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD9A0A1-AAF8-425C-9CD4-055521E40F0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

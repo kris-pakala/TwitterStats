@@ -1,5 +1,6 @@
 using System.Text.Json;
 using TwitterStats.Models;
+using TwitterStats.Services;
 
 namespace TwitterStats.Tests
 {
@@ -13,21 +14,30 @@ namespace TwitterStats.Tests
         [Test]
         public async Task StreamTweetsFromFile()
         {
-            await foreach (var twt in GetTweets())
+            var tweetStatsService = new TweetStatsService();
+
+            await foreach (var tweet in GetTweets())
             {
-                Console.WriteLine(twt.data.text);
+                tweetStatsService.AddTweet(tweet);
             }
 
-            Assert.Pass();
+            var topTweets = tweetStatsService.GetTopTweets();
+
+            Assert.That(topTweets.Count, Is.EqualTo(10));
+
+            var totalTweets = tweetStatsService.GetTotalTweets();
+            Assert.That(totalTweets, Is.EqualTo(1171));
         }
 
         async IAsyncEnumerable<Tweet> GetTweets()
         {
-            var reader = new StreamReader(@"C:\Users\KrisPakala\TwitterStream_2.json");
+            var reader = new StreamReader(@"C:\Users\KrisPakala\TwitterStream.json");
 
             string? line;
             while ((line = await reader.ReadLineAsync()) != null)
             {
+                if (string.IsNullOrEmpty(line)) continue;
+
                 var tweet = JsonSerializer.Deserialize<Tweet>(line);
                 yield return tweet;
             }

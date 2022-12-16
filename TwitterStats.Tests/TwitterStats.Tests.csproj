@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TwitterStats.Models\TwitterStats.Models.csproj" />
+    <ProjectReference Include="..\TwitterStats.Services\TwitterStats.Services.csproj" />
   </ItemGroup>
 
 </Project>
