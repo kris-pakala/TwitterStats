@@ -13,7 +13,17 @@ using TwitterStats.Models;
 
 namespace TwitterStats.Services
 {
-    public class TwitterClientService
+    public interface ITwitterClientService
+    {
+        /// <summary>
+        ///     Stream sample tweets
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        IAsyncEnumerable<Tweet> StreamSampleTweets([EnumeratorCancellation] CancellationToken cancellationToken);
+    }
+
+    public class TwitterClientService : ITwitterClientService
     {
         private readonly ILogger<TwitterClientService> _logger;
         private readonly string _twitterApiKey;

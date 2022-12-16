@@ -1,4 +1,6 @@
 using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using TwitterStats.Models;
 using TwitterStats.Services;
 
@@ -6,13 +8,22 @@ namespace TwitterStats.Tests
 {
     public class Tests
     {
+        private ILogger<TwitterClientService>? _logger;
+
         [SetUp]
         public void Setup()
         {
+            var serviceProvider = new ServiceCollection()
+                .AddLogging()
+                .BuildServiceProvider();
+
+            var factory = serviceProvider.GetService<ILoggerFactory>();
+
+            if (factory != null) _logger = factory.CreateLogger<TwitterClientService>();
         }
 
         [Test]
-        public async Task StreamTweetsFromFile()
+        public async Task ShouldStreamTweetsFromFile()
         {
             var tweetStatsService = new TweetStatsService();
 
@@ -41,6 +52,29 @@ namespace TwitterStats.Tests
                 var tweet = JsonSerializer.Deserialize<Tweet>(line);
                 yield return tweet;
             }
+        }
+
+        [Test]
+        public async Task ShouldStream100Tweets()
+        {
+            var twitterClientService = new TwitterClientService(_logger);
+            var cancellationTokeSource = new CancellationTokenSource();
+            var totalTweets = 0;
+
+            // read 10 tweets
+            await foreach (var tweet in twitterClientService.StreamSampleTweets(cancellationTokeSource.Token))
+            {
+                totalTweets++;
+
+                if (totalTweets < 100) continue;
+
+                cancellationTokeSource.Cancel();
+                break;
+            }
+
+            Assert.That(totalTweets, Is.GreaterThanOrEqualTo(100));
+
+            await Task.Delay(10000);
         }
     }
 }
