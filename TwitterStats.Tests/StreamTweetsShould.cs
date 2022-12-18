@@ -6,7 +6,7 @@ using TwitterStats.Services;
 
 namespace TwitterStats.Tests
 {
-    public class Tests
+    public class StreamTweetsShould
     {
         private ILogger<TwitterClientService>? _logger;
 
@@ -23,11 +23,20 @@ namespace TwitterStats.Tests
         }
 
         [Test]
-        public async Task ShouldStreamTweetsFromFile()
+        [TestCaseSource(typeof(StreamTestData), nameof(TwitterStats.Tests.StreamTestData.GetStreamTestData), new object[]{"StreamTestData.txt"})]
+        public void AddTweet(Tweet tweet)
         {
             var tweetStatsService = new TweetStatsService();
 
-            await foreach (var tweet in GetTweets())
+            tweetStatsService.AddTweet(tweet);
+        }
+
+        [Test]
+        public void ReturnTweetStats()
+        {
+            var tweetStatsService = new TweetStatsService();
+
+            foreach (var tweet in StreamTestData.GetStreamTestData("StreamTestData.txt"))
             {
                 tweetStatsService.AddTweet(tweet);
             }
@@ -37,25 +46,11 @@ namespace TwitterStats.Tests
             Assert.That(topTweets.Count, Is.EqualTo(10));
 
             var totalTweets = tweetStatsService.GetTotalTweets();
-            Assert.That(totalTweets, Is.EqualTo(1171));
-        }
-
-        async IAsyncEnumerable<Tweet> GetTweets()
-        {
-            var reader = new StreamReader(@"C:\Users\KrisPakala\TwitterStream.json");
-
-            string? line;
-            while ((line = await reader.ReadLineAsync()) != null)
-            {
-                if (string.IsNullOrEmpty(line)) continue;
-
-                var tweet = JsonSerializer.Deserialize<Tweet>(line);
-                yield return tweet;
-            }
+            Assert.That(totalTweets, Is.EqualTo(20));
         }
 
         [Test]
-        public async Task ShouldStream100Tweets()
+        public async Task Read100TweetsFromTwitter()
         {
             var twitterClientService = new TwitterClientService(_logger);
             var cancellationTokeSource = new CancellationTokenSource();
@@ -73,8 +68,6 @@ namespace TwitterStats.Tests
             }
 
             Assert.That(totalTweets, Is.GreaterThanOrEqualTo(100));
-
-            await Task.Delay(10000);
         }
     }
 }
